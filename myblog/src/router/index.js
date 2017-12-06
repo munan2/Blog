@@ -1,6 +1,7 @@
 import Home from '../components/home'
 import ArticleList from '../components/article-list'
 import ArticleEdit from '../components/article-edit'
+import Login from '../components/login'
 
 const routers = [
 	{
@@ -22,6 +23,10 @@ const routers = [
 				component: ArticleEdit
 			}
 		]
+	},
+	{
+		path: '/login',
+		component: Login
 	}
 ]
 export default routers

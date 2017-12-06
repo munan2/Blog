@@ -4,8 +4,8 @@
         <div class="avatar" @click="showback">
             <img src="../assets/logo.png" alt="">
         </div>
-        <div class="back-box">
-            <span class="back-item">退出</span>
+        <div class="back-box" v-if="show">
+            <router-link class="back-item" tag="span" :to="{path:'/login'}">退出</router-link>
         </div>
   </div>
 </template>
@@ -13,7 +13,12 @@
 export default {
     data () {
         return {
-
+            show: 0
+        }
+    },
+    methods: {
+        showback: function () {
+            this.show = 1;
         }
     }
 }
