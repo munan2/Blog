@@ -2,7 +2,6 @@
 	<div>
 		<div class="table-box">
 	        <div class="table-header-container">
-	            <el-button type="primary">新增文章</el-button>
 	            <el-input class="search-box" v-model="searchContent" placeholder="搜索内容"></el-input>
 	        </div>
 	        <el-table :data="tableData" style="width: 100%" ref="multipleTable" :default-sort = "{prop: 'date', order: 'descending'}">
@@ -37,11 +36,11 @@
 	            width="180">
 	            <template slot-scope="scope">
 	                <el-button
-	                size="mini" @click="editArticle(scope.$index, scope.row)"
+	                size="mini" @click="editArticle(scope.row)"
 	                >编辑</el-button>
 	                <el-button
 	                size="mini"
-	                type="danger"
+	                type="danger" @click="deleteArticle(scope.row)"
 	                >删除</el-button>
 	            </template>
 	            </el-table-column>
@@ -55,21 +54,55 @@
 	    data () {
 	        return {
 	        	searchContent: '',
-	            tableData: []
+	            tableData: [],
+	            queryFlag: 0
 	        }
 	    },
-	    created(){
-	    	this.$http.post('/getArticle', {
-
-	    	}).then(res => {
-	    		this.tableData = res.data.info;
-	    	}).catch(err => {
-	    		console.log(err);
-	    	})
+	    created (){
+	    	this.updateList();
+	    },
+	    watch: {
+	    	"$route" : "updateList",
+	    	searchContent (cul, old) {
+	    		this.$http.post('/searchArticle', {
+	    			flag: this.queryFlag,
+	    			model: cul
+	    		}).then(res => {
+	    			this.tableData = res.data.info;
+	    		}).catch(err => {
+	    			console.log(err);
+	    		})
+	    	}
 	    },
 	    methods: {
-	    	editArticle: function (index, row) {
-	    		console.log(index);
+	    	updateList: function () {
+	    		if (this.$route.query.flag) {
+	    			this.queryFlag = this.$route.query.flag;
+	    		} else {
+	    			this.queryFlag = 0;
+	    		}
+	    		console.log(this.queryFlag + 'haha');
+	    		this.$http.post('/getArticle', {
+	    			flag: this.queryFlag
+		    	}).then(res => {
+		    		this.tableData = res.data.info;
+		    	}).catch(err => {
+		    		console.log(err);
+		    	})
+	    	},
+	    	editArticle: function (row) {
+	    		let id = row._id;
+	    		this.$router.push({path: '/home/edit',query:{id: id}})
+	    	},
+	    	deleteArticle: function (row) {
+	    		let id = row._id;
+	    		this.$http.post('/deleteArticle', {
+	    			id: id
+	    		}).then(function (res) {
+	    			this.updateList();
+	    		}).catch(function (err) {
+	    			console.log(err);
+	    		})
 	    	}
 	    }
 
@@ -80,8 +113,6 @@
         padding: 10px;
     }
     .search-box.el-input {
-        margin-right: 30px;
-        float: right;
         width: 300px;
     }
 </style>

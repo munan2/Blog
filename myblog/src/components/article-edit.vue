@@ -5,7 +5,7 @@
             <el-date-picker
               v-model="dateValue"
               type="date"
-              placeholder="选择日期">
+              placeholder="选择日期" :editable=false>
             </el-date-picker>
         </div>
         <p class="article-title article-item">文章标题：
@@ -43,8 +43,8 @@
             <div class="btn" @click="getHtmlValueFn">获取htmlValue</div>
         </div> -->
         <div class="btns-box">
-            <el-button type="primary" class="save-btn" @click="saveArticle">存为草稿箱</el-button>
-            <el-button type="primary" class="publish-btn" @click="publishArticle">发布</el-button>
+            <el-button type="primary" class="save-btn" @click="saveArticle(1)">存为草稿箱</el-button>
+            <el-button type="primary" class="publish-btn" @click="saveArticle(0)">发布</el-button>
         </div>
   </div>
 </template>
@@ -55,6 +55,7 @@
         name: 'index',
         data() {
             return {
+                articleId: '',
                 dateValue: '',
                 articleTitle: '',
                 msgTextShow: '',
@@ -92,47 +93,57 @@
             markdown
         },
         methods: {
-            saveArticle () {
+            saveArticle (flag) {
                 this.getMdValueFn();
                 this.getHtmlValueFn();
                 let date = moment(this.dateValue).format('YYYY-MM-DD');
                 if (this.articleTitle && this.msgTextShow && this.msgHtmlShow && date && this.LabelValue) {
-                    this.$http.post('/saveArticle',{
-                        title:this.articleTitle,
-                        textContent: this.msgTextShow,
-                        htmlContent: this.msgHtmlShow,
-                        date: date,
-                        label: this.LabelValue
-                    }, {emulateJSON: true})
-                    .then(function(res){
-                        this.articleTitle = '';
-                        this.msg.mdValue = '';
-                        this.msg.htmlValue = '';
-                        this.dateValue = '';
-                        this.LabelValue = '';
-                    })
-                    .catch(function(err){
-                        console.log(err);
-                    });
+                    if (this.articleId) {
+                        var params = {
+                            title:this.articleTitle,
+                            textContent: this.msgTextShow,
+                            htmlContent: this.msgHtmlShow,
+                            date: date,
+                            label: this.LabelValue,
+                            flag: flag,
+                            id: this.articleId
+                        }
+                        this.$http.post('/modifyArticle',params, {emulateJSON: true})
+                        .then(function (res) {
+                            this.articleTitle = '';
+                            this.msg = {}
+                            this.msg.mdValue = '';
+                            this.dateValue = '';
+                            this.LabelValue = '';
+                            this.$route.push({path: '/home/edit'});
+                        })
+                        .catch(function (err) {
+                            console.log(err);
+                        });
+                    } else {
+                        var params = {
+                            title:this.articleTitle,
+                            textContent: this.msgTextShow,
+                            htmlContent: this.msgHtmlShow,
+                            date: date,
+                            label: this.LabelValue,
+                            flag: flag
+                        }
+                        this.$http.post('/saveArticle', params, {emulateJSON: true})
+                        .then(function (res) {
+                            this.articleTitle = '';
+                            this.msg = {}
+                            this.msg.mdValue = '';
+                            this.dateValue = '';
+                            this.LabelValue = '';
+                        })
+                        .catch(function (err) {
+                            console.log(err);
+                        });
+                    }
                 } else {
                     this.$message('请填写完所有信息');
                 }
-            },
-            publishArticle () {
-                this.getMdValueFn();
-                this.getHtmlValueFn();
-                console.log(this.articleTitle);
-                console.log(this.msgTextShow);
-                console.log(this.msgHtmlShow);
-                axios.post('/publishArticle',{
-                    title: this.articleTitle,
-                    text: this.msgTextShow,
-                    html: this.msgHtmlShow
-                }).then((res) => {
-                    console.log(res);
-                }).catch((err) => {
-                    console.log(err);
-                })
             },
             childEventHandler:function(res){
                 // res会传回一个data,包含属性mdValue和htmlValue，具体含义请自行翻译
@@ -150,8 +161,28 @@
                 this.dilogStatus=false;
             },
             handleClassify: function (item) {
-                console.log(item);
                 this.defaultClassify = item;
+            }
+        },
+        updata: function () {
+            this.msg.mdValue = '12345';
+            console.log(this.msg.mdValue);
+        },
+        mounted: function () {
+            if (this.$route.query.id) {
+                this.$http.post('/getOneArticle',{
+                        id: this.$route.query.id
+                    }, {emulateJSON: true})
+                    .then(function(res){
+                        this.articleTitle = res.data.info[0].title;
+                        this.msg.mdValue = res.data.info[0].textContent;
+                        this.dateValue = res.data.info[0].date;
+                        this.LabelValue = res.data.info[0].label;
+                        this.articleId = res.data.info[0]._id;
+                    })
+                    .catch(function(err){
+                        console.log(err);
+                    });
             }
         }
     }

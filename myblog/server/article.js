@@ -10,33 +10,81 @@ let articleSchema = new Mongoose.Schema({
     textContent: {
         type: String
     },
-    htmlConetnt: {
+    htmlContent: {
         type: String
     },
     label: {
         type: String
+    },
+    flag: {
+        type: Number
     }
 });
 
 let articleModel = db.model('article', articleSchema);
 let articles = {
-    save: (title, date, textContent, htmlConetnt, label) => {
-        let articleItem = new articleModel({
-            title: title,
-            date: date,
-            textContent: textContent,
-            htmlConetnt: htmlConetnt,
-            label: label
-        });
-        console.log('sdsd')
+    save: obj => {
+        let articleItem = new articleModel(obj);
         articleItem.save();
     },
     getArticle: (req, res) => {
-        articleModel.find({}, (err, docs) => {
-            console.log(docs.length);
+        articleModel.find({
+            flag: req.body.flag
+        }, (err, docs) => {
             res.send({
                 info: docs
             })
+        })
+    },
+    getOneArticle: (req, res) => {
+        articleModel.find({
+            _id: req.body.id
+        }, (err, docs) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send({
+                    info: docs
+                })
+            }
+        })
+    },
+    deleteOneArticle: (req, res) => {
+        articleModel.remove({
+            _id: req.body.id
+        }, err => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("用户删除成功")
+            }
+        });
+    },
+    update: obj => {
+        articleModel.update({_id: obj.id}, {
+            title: obj.title,
+            flag: obj.flag,
+            textContent: obj.textContent,
+            htmlContent: obj.htmlContent,
+            label: obj.label,
+            date: obj.date
+        }, (err, docs) => {
+                if(err) console.log(err);
+                console.log('更改成功：' + docs);
+        })
+    },
+    searchArticle: (req, res) => {
+        articleModel.find({
+            flag: req.body.flag,
+            title: new RegExp(req.body.model)
+        }, (err, docs) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send({
+                    info: docs
+                })
+            }
         })
     }
 }

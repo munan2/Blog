@@ -272,6 +272,9 @@
                 let maxPreviewScrollHeight=document.querySelector('.previewContainer').scrollHeight-document.querySelector('.previewContainer').clientHeight;
                 this.maxEditScrollHeight = maxEditScrollHeight
                 this.maxPreviewScrollHeight = maxPreviewScrollHeight
+            },
+            mdValuesP:function(cul, old){
+                this.input = cul;
             }
         }
     }

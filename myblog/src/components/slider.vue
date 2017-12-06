@@ -4,11 +4,20 @@
             default-active="1"
             class="el-menu-vertical-demo"
  			>
-            <router-link to="/home/show" tag="div">
-                <el-menu-item index="1">
-                    <i class="el-icon-tickets"></i>
-                    <span slot="title">文章管理</span>
-                </el-menu-item>
+                <el-submenu index="1">
+                    <template slot="title">
+                        <i class="el-icon-tickets"></i>
+                        <span slot="title">文章管理</span>
+                    </template>
+                    <el-menu-item-group>
+                        <router-link :to="{path:'/home/show', params:{flag: 0}}" tag="div">
+                            <el-menu-item index="1-1">已发布</el-menu-item>
+                        </router-link>
+                        <router-link :to="{path:'/home/show', query:{flag: 1}}" tag="div">
+                            <el-menu-item index="1-2">草稿箱</el-menu-item>
+                        </router-link>
+                    </el-menu-item-group>
+                </el-submenu>
             </router-link>
             <router-link to="/home/edit" tag="div">
                 <el-menu-item index="2">

@@ -2,7 +2,6 @@ import Home from '../components/home'
 import ArticleList from '../components/article-list'
 import ArticleEdit from '../components/article-edit'
 
-console.log('router')
 const routers = [
 	{
 		path: '/',
