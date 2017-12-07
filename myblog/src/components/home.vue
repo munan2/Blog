@@ -1,8 +1,8 @@
 <template>
 	<div id="home-box">
-		<my-slider :userinfo="userinfo"></my-slider>
+		<my-slider :userInfo="getUserinfo"></my-slider>
 		<div class="content-box">
-			<my-header :userInfo = "userinfo"></my-header>
+			<my-header :userInfo = "getUserinfo"></my-header>
 			<router-view></router-view>
 	    </div>
 	</div>
@@ -17,7 +17,7 @@
 		},
 		data () {
 			return {
-				userinfo: ''
+				getUserinfo: ''
 			}
 		},
 		mounted () {
@@ -26,11 +26,12 @@
 	            this.$http.post('/getUser', {
 	                name: name
 	            }).then(function (res) {
-	                this.userinfo = res.data.info[0];
+	                this.getUserinfo = res.data.info[0];
 	            }).catch(function (err) {
 	            	console.log(err);
 	            })
 	        }
+	        console.log(this.getUserinfo);
 	    }
 	}
 </script>

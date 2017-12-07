@@ -11,12 +11,18 @@
 </template>
 <script>
 export default {
-    props: ['userinfo'],
+    props: {
+        'userInfo': {
+            type: Object,
+            default: {}
+        }
+    },
     data () {
         return {
             show: 0,
             srcImg: require('../assets/logo.png'),
-            username: this.$route.query.name
+            username: this.$route.query.name,
+            userinfo: this.userInfo
         }
     },
     methods: {
@@ -25,7 +31,8 @@ export default {
         }
     },
     mounted () {
-        if (userinfo.img) {
+        console.log(this.userInfo);
+        if (this.userinfo.img) {
             this.srcImg = res.data.info[0].img;
         }
     }

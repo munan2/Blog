@@ -90,7 +90,7 @@
             if (res.data.status === 0) {
               this.$message('您已经注册过，请不要重复注册');
             } else {
-              this.$router.push({path: '/home/show',query:{name: this.registForm.name}});
+              window.location.href = '/home/show' + '?name=' + this.registForm.name + '&t=' + (new Date()).getTime().toString();
             }
         }).catch(function (err) {
           console.log(err);

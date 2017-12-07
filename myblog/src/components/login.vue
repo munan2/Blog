@@ -67,7 +67,7 @@
       				this.$router.replace('/');
       			} else {
 					// this.$router.push({path: '/home/show',query:{name: res.data.info[0].name}});
-  					window.location.href = '/home/show?name='+ res.data.info[0].name;
+  					window.location.href = '/home/show?name='+ res.data.info[0].name + '&t=' + (new Date()).getTime().toString();
       			}
       		})
       	}

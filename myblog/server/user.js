@@ -19,7 +19,7 @@ let user = {
         userModel.find({
             name: req.body.name
         }, (err, docs) => {
-            if (doc.length) {
+            if (docs.length) {
                 res.send({
                     status: 0
                 })
@@ -39,7 +39,7 @@ let user = {
             if (err) {
                 console.log(err);
             } else {
-                if (doc.length) {
+                if (docs.length) {
                     res.send({
                         status: 0
                     })

@@ -31,7 +31,7 @@
                     <span slot="title">设置中心</span>
                 </el-menu-item>
             </router-link>
-            <router-link to="/home/user" tag="div" :v-show="userinfo.flag">
+            <router-link to="/home/user" tag="div" :v-show="userInfo.flag">
                 <el-menu-item index="4">
                     <i class="el-icon-bell"></i>
                     <span slot="title">用户管理</span>
@@ -42,12 +42,21 @@
 </template>
 <script>
 	export default {
-        props: ['userinfo'],
+        props: {
+           'userInfo': {
+                type: Object,
+                default: {}
+            } 
+        },
         data () {
             return {
 
             }
+        },
+        mounted () {
+            console.log(this.userInfo);
         }
+
 	}
 </script>
 <style>
