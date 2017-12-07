@@ -66,11 +66,8 @@
       				this.$message('用户信息不正确，请重新输入');
       				this.$router.replace('/');
       			} else {
-      				window.app = this
-      				setTimeout(() => {
-      					// this.$router.push({path: '/home/show',query:{name: res.data.info[0].name}});
-      					window.location.href = '/home/show?name=zhangyan123012'
-      				}, 300)
+					// this.$router.push({path: '/home/show',query:{name: res.data.info[0].name}});
+  					window.location.href = '/home/show?name='+ res.data.info[0].name;
       			}
       		})
       	}

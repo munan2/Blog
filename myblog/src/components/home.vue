@@ -1,8 +1,8 @@
 <template>
 	<div id="home-box">
-		<my-slider></my-slider>
+		<my-slider :userinfo="userinfo"></my-slider>
 		<div class="content-box">
-			<my-header></my-header>
+			<my-header :userInfo = "userinfo"></my-header>
 			<router-view></router-view>
 	    </div>
 	</div>
@@ -14,7 +14,24 @@
 		components: {
 			'my-slider': Slider,
 			'my-header': MyHeader
-		}
+		},
+		data () {
+			return {
+				userinfo: ''
+			}
+		},
+		mounted () {
+	        let name = this.$route.query.name;
+	        if (name) {
+	            this.$http.post('/getUser', {
+	                name: name
+	            }).then(function (res) {
+	                this.userinfo = res.data.info[0];
+	            }).catch(function (err) {
+	            	console.log(err);
+	            })
+	        }
+	    }
 	}
 </script>
 <style>

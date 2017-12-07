@@ -4,7 +4,8 @@ import ArticleEdit from '../components/article-edit'
 import Login from '../components/login'
 import Index from '../components/index'
 import Regist from '../components/regist'
-
+import Usercenter from '../components/usercenter'
+import Settings from '../components/settings'
 const routers = [
 	{
 		path: '/',
@@ -23,6 +24,12 @@ const routers = [
 				path: 'edit',
 				// name: 'edit',
 				component: ArticleEdit
+			}, {
+				path: 'setting',
+				components: Settings
+			}, {
+				path: 'user',
+				components: Usercenter
 			}
 		]
 	},

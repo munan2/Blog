@@ -11,6 +11,7 @@
 </template>
 <script>
 export default {
+    props: ['userinfo'],
     data () {
         return {
             show: 0,
@@ -24,18 +25,8 @@ export default {
         }
     },
     mounted () {
-        let name = this.$route.query.name;
-        if (name) {
-            this.$http.post('/getUser', {
-                name: name
-            }).then(function (res) {
-                this.username = res.data.info[0].name;
-                if (res.data.info[0].img) {
-                    this.srcImg = res.data.info[0].img;
-                }
-            }).catch(function (err) {
-
-            })
+        if (userinfo.img) {
+            this.srcImg = res.data.info[0].img;
         }
     }
 }

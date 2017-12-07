@@ -18,6 +18,9 @@ let articleSchema = new Mongoose.Schema({
     },
     flag: {
         type: Number
+    },
+    name: {
+        type: String
     }
 });
 
