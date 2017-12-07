@@ -1,4 +1,4 @@
-let mongoose = require('mongoose')
+const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/munanblog', {useMongoClient:true});
 /**
   * 连接成功

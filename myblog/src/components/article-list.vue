@@ -81,9 +81,9 @@
 	    		} else {
 	    			this.queryFlag = 0;
 	    		}
-	    		console.log(this.queryFlag + 'haha');
 	    		this.$http.post('/getArticle', {
-	    			flag: this.queryFlag
+	    			flag: this.queryFlag,
+	    			name: this.$route.query.name
 		    	}).then(res => {
 		    		this.tableData = res.data.info;
 		    	}).catch(err => {

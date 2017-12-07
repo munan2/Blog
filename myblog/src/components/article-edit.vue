@@ -55,6 +55,7 @@
         name: 'index',
         data() {
             return {
+                name: this.$router.query.name,
                 articleId: '',
                 dateValue: '',
                 articleTitle: '',
@@ -94,6 +95,7 @@
         },
         methods: {
             saveArticle (flag) {
+                console.log(this.name);
                 this.getMdValueFn();
                 this.getHtmlValueFn();
                 let date = moment(this.dateValue).format('YYYY-MM-DD');
@@ -106,6 +108,7 @@
                             date: date,
                             label: this.LabelValue,
                             flag: flag,
+                            name: this.$route.query.name,
                             id: this.articleId
                         }
                         this.$http.post('/modifyArticle',params, {emulateJSON: true})
@@ -127,7 +130,8 @@
                             htmlContent: this.msgHtmlShow,
                             date: date,
                             label: this.LabelValue,
-                            flag: flag
+                            flag: flag,
+                            name: this.$route.query.name
                         }
                         this.$http.post('/saveArticle', params, {emulateJSON: true})
                         .then(function (res) {
@@ -163,10 +167,6 @@
             handleClassify: function (item) {
                 this.defaultClassify = item;
             }
-        },
-        updata: function () {
-            this.msg.mdValue = '12345';
-            console.log(this.msg.mdValue);
         },
         mounted: function () {
             if (this.$route.query.id) {

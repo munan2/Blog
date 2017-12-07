@@ -1,12 +1,13 @@
 const fs = require('fs')
 const path = require('path')
 let express = require('express')
-let db = require('./db')
+const db = require('./db')
 let articles = require('./article')
+let user = require('./user')
 let router = express.Router()
 router.post('/saveArticle', (req, res) => {
     articles.save(req.body);
-    res.send('11');
+    res.send('success save');
 });
 router.post('/getArticle', (req, res) => {
     res.info = articles.getArticle(req, res)
@@ -16,14 +17,26 @@ router.post('/getOneArticle', (req, res) => {
 });
 router.post('/deleteArticle', (req, res) => {
 	res.info = articles.deleteOneArticle(req, res);
-	res.send('11');
+	res.send('success delete');
 });
 router.post('/modifyArticle', (req, res) => {
 	articles.update(req.body);
-	res.send('11');
+	res.send('success modify');
 });
 router.post('/searchArticle', (req, res) => {
 	articles.searchArticle(req, res);
+});
+router.post('/regist', (req, res) => {
+	user.regist(req, res);
+});
+router.post('/checkName', (req, res) => {
+	user.checkName(req, res);
+});
+router.post('/getUser', (req, res) => {
+	user.searchUser(req, res);
+});
+router.post('/login', (req, res) => {
+	user.checkUser(req, res);
 })
 
 module.exports = router;

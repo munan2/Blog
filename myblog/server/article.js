@@ -1,5 +1,5 @@
-let Mongoose = require('mongoose')
-let db = require('./db')
+const Mongoose = require('mongoose')
+const db = require('./db')
 let articleSchema = new Mongoose.Schema({
     title: {
         type: String
@@ -29,7 +29,8 @@ let articles = {
     },
     getArticle: (req, res) => {
         articleModel.find({
-            flag: req.body.flag
+            flag: req.body.flag,
+            name: req.body.name
         }, (err, docs) => {
             res.send({
                 info: docs
@@ -67,7 +68,8 @@ let articles = {
             textContent: obj.textContent,
             htmlContent: obj.htmlContent,
             label: obj.label,
-            date: obj.date
+            date: obj.date,
+            name: obj.name
         }, (err, docs) => {
                 if(err) console.log(err);
                 console.log('更改成功：' + docs);
