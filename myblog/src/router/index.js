@@ -13,7 +13,7 @@ const routers = [
 		redirect: '/index/login',
 	},
 	{
-		path: '/home',
+		path: '/home/',
 		component: Home,
 		children: [
 			{
@@ -26,10 +26,10 @@ const routers = [
 				component: ArticleEdit
 			}, {
 				path: 'setting',
-				components: Settings
+				component: Settings
 			}, {
 				path: 'user',
-				components: Usercenter
+				component: Usercenter
 			}
 		]
 	},

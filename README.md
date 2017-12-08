@@ -13,3 +13,6 @@ vue-cli+express+mongodb
     ```
     
 4. 304缓存加时间戳'&t=' + (new Date()).getTime().toString()
+5. https://segmentfault.com/a/1190000008010666 看vue生命周期
+6. 登录注册，session确定是否过期
+7. 子组件与父组件动态传值

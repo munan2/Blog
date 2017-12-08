@@ -10,10 +10,10 @@
                         <span slot="title">文章管理</span>
                     </template>
                     <el-menu-item-group>
-                        <router-link :to="{path:'/home/show', params:{flag: 0}}" tag="div">
+                        <router-link :to="{path:'/home/show?flag=0', query:{flag: 0}}" tag="div">
                             <el-menu-item index="1-1">已发布</el-menu-item>
                         </router-link>
-                        <router-link :to="{path:'/home/show', query:{flag: 1}}" tag="div">
+                        <router-link :to="{path:'/home/show?flag=1', query:{flag: 1}}" tag="div">
                             <el-menu-item index="1-2">草稿箱</el-menu-item>
                         </router-link>
                     </el-menu-item-group>
@@ -31,7 +31,7 @@
                     <span slot="title">设置中心</span>
                 </el-menu-item>
             </router-link>
-            <router-link to="/home/user" tag="div" :v-show="userInfo.flag">
+            <router-link to="/home/user" tag="div" v-show="flag">
                 <el-menu-item index="4">
                     <i class="el-icon-bell"></i>
                     <span slot="title">用户管理</span>
@@ -46,15 +46,23 @@
            'userInfo': {
                 type: Object,
                 default: {}
-            } 
+            }
         },
         data () {
             return {
-
+                flag: false,
+                params: {},
+                name: ''
             }
         },
         mounted () {
-            console.log(this.userInfo);
+        },
+        watch: {
+            'userInfo': function (cur, old) {
+                this.userInfo = cur;
+                this.userInfo.flag === 0 ? this.flag = false: this.flag = true;
+                this.name = this.userInfo.name;
+            }
         }
 
 	}

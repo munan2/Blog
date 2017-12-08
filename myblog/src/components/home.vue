@@ -17,7 +17,7 @@
 		},
 		data () {
 			return {
-				getUserinfo: ''
+				getUserinfo: {}
 			}
 		},
 		mounted () {
@@ -31,7 +31,20 @@
 	            	console.log(err);
 	            })
 	        }
-	        console.log(this.getUserinfo);
+	        setTimeout(() => {
+				this.getUserinfo = {
+		        	_id: "5a29f600700d2257035b0617",
+		        	name: "zhaifu",
+		        	pass: "12345",
+		        	flag: 0, __v: 0
+		        }
+	        }, 100)
+	    },
+	    watch: {
+	    	'getUserinfo': function (cul, old) {
+	    		this.getUserinfo = cul;
+	    		console.log(this.getUserinfo);
+	    	}
 	    }
 	}
 </script>

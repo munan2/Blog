@@ -31,7 +31,6 @@ export default {
         }
     },
     mounted () {
-        console.log(this.userInfo);
         if (this.userinfo.img) {
             this.srcImg = res.data.info[0].img;
         }

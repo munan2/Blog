@@ -53,9 +53,12 @@
     import moment from 'moment'
     export default {
         name: 'index',
+        components: {
+            markdown
+        },
         data() {
             return {
-                name: this.$router.query.name,
+                name: '',
                 articleId: '',
                 dateValue: '',
                 articleTitle: '',
@@ -89,9 +92,6 @@
                 }],
                 LabelValue: ''
             }
-        },
-        components: {
-            markdown
         },
         methods: {
             saveArticle (flag) {
