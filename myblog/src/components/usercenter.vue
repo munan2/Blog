@@ -29,7 +29,7 @@
     },
     methods: {
     	updateUser: function () {
-    		this.$http.post('/getAllUser', {
+    		this.$http.post('/api/getAllUser', {
     			flag: 0
     		}).then(function (res) {
     	     this.tableData = res.data.userInfo;
@@ -41,7 +41,7 @@
         let id = row._id;
         this.$confirm('确认要删除该用户？')
           .then(_ => {
-            this.$http.post('/deleteUser', {
+            this.$http.post('/api/deleteUser', {
               id: id
             }).then(function (res) {
               this.updateUser();

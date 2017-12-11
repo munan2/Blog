@@ -95,7 +95,6 @@
         },
         methods: {
             saveArticle (flag) {
-                console.log(this.name);
                 this.getMdValueFn();
                 this.getHtmlValueFn();
                 let date = moment(this.dateValue).format('YYYY-MM-DD');
@@ -111,7 +110,7 @@
                             name: window.localStorage.getItem('username'),
                             id: this.articleId
                         }
-                        this.$http.post('/modifyArticle',params, {emulateJSON: true})
+                        this.$http.post('/api/modifyArticle',params, {emulateJSON: true})
                         .then(function (res) {
                             this.articleTitle = '';
                             this.msg = {}
@@ -133,7 +132,7 @@
                             flag: flag,
                             name: window.localStorage.getItem('username')
                         }
-                        this.$http.post('/saveArticle', params, {emulateJSON: true})
+                        this.$http.post('/api/saveArticle', params, {emulateJSON: true})
                         .then(function (res) {
                             this.articleTitle = '';
                             this.msg = {}
@@ -170,7 +169,7 @@
         },
         mounted: function () {
             if (this.$route.query.id) {
-                this.$http.post('/getOneArticle',{
+                this.$http.post('/api/getOneArticle',{
                         id: this.$route.query.id
                     }, {emulateJSON: true})
                     .then(function(res){

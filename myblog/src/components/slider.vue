@@ -25,12 +25,12 @@
                     <span slot="title">编辑文章</span>
                 </el-menu-item>
             </router-link>
-            <!-- <router-link to="/home/setting" tag="div">
+            <router-link to="/home/setting" tag="div">
                 <el-menu-item index="3">
                     <i class="el-icon-setting"></i>
                     <span slot="title">设置中心</span>
                 </el-menu-item>
-            </router-link> -->
+            </router-link>
             <router-link to="/home/user" tag="div" v-show="flag">
                 <el-menu-item index="4">
                     <i class="el-icon-bell"></i>

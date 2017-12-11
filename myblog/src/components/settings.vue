@@ -1,58 +1,46 @@
 <template>
-<div>
-  哈哈
- <!--  <el-form :model="allInfoForm"  label-width="60px" class="fullfill-box">
-      <h2 class="login-title">完善用户信息</h2>
-      <el-form-item label="用户名">
-        <el-input v-model="allInfoForm.name"></el-input>
-      </el-form-item>
-      <el-form-item label="github账号">
-        <el-input v-model="allInfoForm.github" auto-complete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="微博">
-        <el-input v-model="allInfoForm.weibo" auto-complete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="juejin账号">
-        <el-input v-model="allInfoForm.juejin" auto-complete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="email">
-        <el-input v-model="allInfoForm.email" auto-complete="off"></el-input>
-      </el-form-item>
-      <el-upload
-        class="avatar-uploader"
-        action="https://jsonplaceholder.typicode.com/posts/"
-        :show-file-list="false"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload">
-        <img v-if="imageUrl" :src="imageUrl" class="avatar">
-        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-      </el-upload>
-      <el-button type="primary" @click="changeInfo">修改</el-button>
-  </el-form>  -->
+<div class="setting-container">
+  <h2>完善个人信息</h2>
+  <!-- <p class="setting-item">文章标题：
+      <el-input v-model="username" placeholder="请输入内容"></el-input>
+  </p> -->
+  <div class="upload-img"><span>头像上传</span>
+    <el-upload
+      class="avatar-uploader"
+      action="https://jsonplaceholder.typicode.com/posts/"
+      :show-file-list="false"
+      :on-success="handleAvatarSuccess"
+      :before-upload="beforeAvatarUpload">
+      <img v-if="imageUrl" :src="imageUrl" class="avatar">
+      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+    </el-upload>
+  </div>
 </div>
- 
 </template>
 <script>
   export default {
     data () {
       return {
-      //   allInfoForm: {
-      //     name: '',
-      //     github: '',
-      //     email: '',
-      //     juejin: '',
-      //     weibo: '',
-      //     img: ''
-      //   },
-      //   nameFlag: 0,
-      //   passFlag: 0
-      // }
+        username: window.localStorage.getItem('username'),
+        nameFlag: 0,
+        passFlag: 0
+      }
     }
   }
 </script>
 
 
 <style>
+  .setting-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 40px;
+  }
+  .upload-img {
+  }
+  .avatar-uploader {
+    display: inline-block;
+  }
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
@@ -66,14 +54,14 @@
   .avatar-uploader-icon {
     font-size: 28px;
     color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
     text-align: center;
   }
   .avatar {
-    width: 178px;
-    height: 178px;
+    width: 50px;
+    height: 50px;
     display: block;
   }
 </style>
@@ -104,3 +92,10 @@
     }
   }
 </script>
+<style>
+  .article-item {
+    height: 40px;
+    line-height: 40px;
+    padding: 10px;
+  }
+</style>

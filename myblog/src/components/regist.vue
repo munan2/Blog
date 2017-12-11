@@ -27,7 +27,7 @@
           // if (!Number.isInteger(value)) {
           //   callback(new Error('请输入数字值'));
           // }
-        this.$http.post('/checkName', {
+        this.$http.post('/api/checkName', {
           name: value
         }, {emulateJSON: true})
         .then(function (res) {
@@ -82,7 +82,7 @@
     },
     methods: {
       registInfo: function () {
-        this.$http.post('/regist', {
+        this.$http.post('/api/regist', {
           name: this.registForm.name,
           pass: this.registForm.pass,
           flag: 0

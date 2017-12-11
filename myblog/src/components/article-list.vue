@@ -64,7 +64,7 @@
 	    watch: {
 	    	"$route" : "updateList",
 	    	searchContent (cul, old) {
-	    		this.$http.post('/searchArticle', {
+	    		this.$http.post('/api/searchArticle', {
 	    			flag: this.queryFlag,
 	    			model: cul,
 	    			name: window.localStorage.getItem('username')
@@ -83,7 +83,7 @@
 	    			this.queryFlag = 0;
 	    		}
 	    		if (Number(window.localStorage.getItem('userFlag')) === 0) {
-	    			this.$http.post('/getArticle', {
+	    			this.$http.post('/api/getArticle', {
 	    			flag: this.queryFlag,
 	    			name: window.localStorage.getItem('username')
 			    	}).then(res => {
@@ -92,7 +92,7 @@
 			    		console.log(err);
 			    	})
 	    		} else {
-	    			this.$http.post('/getArticle', {
+	    			this.$http.post('/api/getArticle', {
 	    			flag: this.queryFlag,
 			    	}).then(res => {
 			    		this.tableData = res.data.info;
@@ -110,7 +110,7 @@
 	    		let id = row._id;
 	    		this.$confirm('确认要删除该用户？')
 		       	.then(_ => {
-		            this.$http.post('/deleteArticle', {
+		            this.$http.post('/api/deleteArticle', {
 		    			id: id
 		    		}).then(function (res) {
 		    			this.updateList();

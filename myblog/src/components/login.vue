@@ -58,7 +58,7 @@
     methods: {
       loginInfo: function () {
       	if (this.nameFlag && this.passFlag) {
-      		this.$http.post('/login', {
+      		this.$http.post('/api/login', {
       			name: this.loginForm.name,
       			pass: this.loginForm.pass
       		}, {emulateJSON: true}).then(function (res) {
