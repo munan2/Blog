@@ -90,6 +90,10 @@
             if (res.data.status === 0) {
               this.$message('您已经注册过，请不要重复注册');
             } else {
+              window.localStorage.setItem('islogin', true);
+              window.localStorage.setItem('username', this.registForm.name);
+              window.localStorage.setItem('userFlag', 0);
+              window.localStorage.setItem('img', '');
               window.location.href = '/home/show' + '?name=' + this.registForm.name + '&t=' + (new Date()).getTime().toString();
             }
         }).catch(function (err) {

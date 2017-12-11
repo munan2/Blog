@@ -37,6 +37,12 @@ router.post('/getUser', (req, res) => {
 });
 router.post('/login', (req, res) => {
 	user.checkUser(req, res);
+});
+router.post('/getAllUser', (req, res) => {
+	user.getAllUser(req, res);
+});
+router.post('/deleteUser', (req, res) => {
+	user.deleteUser(req, res);
 })
 
 module.exports = router;

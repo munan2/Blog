@@ -1,16 +1,16 @@
 <template>
 	<div>
-   		<el-form :label-position="labelPosition" :model="loginForm" status-icon :rules="rules2" ref="loginForm" label-width="60px" class="login-box">
-   			<h2 class="login-title">登录</h2>
-   			<el-form-item label="用户名" prop="name">
-		    	<el-input v-model.name="loginForm.name"></el-input>
-		  	</el-form-item>
-		  	<el-form-item label="密码" prop="pass">
-		    	<el-input type="password" v-model="loginForm.pass" auto-complete="off"></el-input>
-		  	</el-form-item>
-		  	<router-link :to="{path:'/index/regist'}" tag="div" class="regist-tag">没有账号，请注册</router-link>
-		    <el-button type="primary" @click="loginInfo">登录</el-button>
-		</el-form>
+ 		<el-form :label-position="labelPosition" :model="loginForm" status-icon :rules="rules2" ref="loginForm" label-width="60px" class="login-box">
+ 			<h2 class="login-title">登录</h2>
+ 			<el-form-item label="用户名" prop="name">
+	    	<el-input v-model.name="loginForm.name"></el-input>
+	  	</el-form-item>
+	  	<el-form-item label="密码" prop="pass">
+	    	<el-input type="password" v-model="loginForm.pass" auto-complete="off"></el-input>
+	  	</el-form-item>
+	  	<router-link :to="{path:'/index/regist'}" tag="div" class="regist-tag">没有账号，请注册</router-link>
+	    <el-button type="primary" @click="loginInfo">登录</el-button>
+	  </el-form>
 	</div>
 </template>
 <script>
@@ -66,8 +66,12 @@
       				this.$message('用户信息不正确，请重新输入');
       				this.$router.replace('/');
       			} else {
-					// this.$router.push({path: '/home/show',query:{name: res.data.info[0].name}});
-  					window.location.href = '/home/show?name='+ res.data.info[0].name + '&t=' + (new Date()).getTime().toString();
+              window.localStorage.setItem('islogin', true);
+              window.localStorage.setItem('username', res.data.info[0].name);
+              window.localStorage.setItem('userFlag', res.data.info[0].flag);
+              window.localStorage.setItem('img', res.data.info[0].flag.img);
+              // this.$store.state.user = res.data.info[0];
+  					  window.location.href = '/home/show?t=' + (new Date()).getTime().toString();
       			}
       		})
       	}

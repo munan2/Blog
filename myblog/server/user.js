@@ -9,6 +9,9 @@ let userSchema = new Mongoose.Schema({
     },
     flag: {
         type: Number
+    },
+    img: {
+        type: String
     }
 });
 
@@ -81,6 +84,32 @@ let user = {
                 }
             }
         })
+    },
+    getAllUser: (req, res) => {
+        userModel.find({
+            flag: req.body.flag
+        }, (err, docs) => {
+            if (err) {
+                console.log(err);
+            } else {
+                if (docs.length) {
+                    res.send({
+                        userInfo: docs
+                    })
+                }
+            }
+        })
+    },
+    deleteUser: (req, res) => {
+        userModel.remove({
+            _id: req.body.id
+        }, err => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("用户删除成功")
+            }
+        });
     }
 }
 module.exports = user;

@@ -31,10 +31,17 @@ let articles = {
         articleItem.save();
     },
     getArticle: (req, res) => {
-        articleModel.find({
-            flag: req.body.flag,
-            name: req.body.name
-        }, (err, docs) => {
+        if (req.body.name) {
+            var params = {
+                flag: req.body.flag,
+                name: req.body.name
+            }
+        } else {
+           var params = {
+                flag: req.body.flag
+            } 
+        }
+        articleModel.find(params, (err, docs) => {
             res.send({
                 info: docs
             })

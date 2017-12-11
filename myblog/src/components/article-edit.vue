@@ -108,7 +108,7 @@
                             date: date,
                             label: this.LabelValue,
                             flag: flag,
-                            name: this.$route.query.name,
+                            name: window.localStorage.getItem('username'),
                             id: this.articleId
                         }
                         this.$http.post('/modifyArticle',params, {emulateJSON: true})
@@ -131,7 +131,7 @@
                             date: date,
                             label: this.LabelValue,
                             flag: flag,
-                            name: this.$route.query.name
+                            name: window.localStorage.getItem('username')
                         }
                         this.$http.post('/saveArticle', params, {emulateJSON: true})
                         .then(function (res) {

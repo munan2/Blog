@@ -1,8 +1,8 @@
 <template>
 	<div id="home-box">
-		<my-slider :userInfo="getUserinfo"></my-slider>
+		<my-slider></my-slider>
 		<div class="content-box">
-			<my-header :userInfo = "getUserinfo"></my-header>
+			<my-header></my-header>
 			<router-view></router-view>
 	    </div>
 	</div>
@@ -21,30 +21,30 @@
 			}
 		},
 		mounted () {
-	        let name = this.$route.query.name;
-	        if (name) {
-	            this.$http.post('/getUser', {
-	                name: name
-	            }).then(function (res) {
-	                this.getUserinfo = res.data.info[0];
-	            }).catch(function (err) {
-	            	console.log(err);
-	            })
-	        }
-	        setTimeout(() => {
-				this.getUserinfo = {
-		        	_id: "5a29f600700d2257035b0617",
-		        	name: "zhaifu",
-		        	pass: "12345",
-		        	flag: 0, __v: 0
-		        }
-	        }, 100)
+	   //      let name = this.$route.query.name;
+	   //      if (name) {
+	   //          this.$http.post('/getUser', {
+	   //              name: name
+	   //          }).then(function (res) {
+	   //              this.getUserinfo = res.data.info[0];
+	   //          }).catch(function (err) {
+	   //          	console.log(err);
+	   //          })
+	   //      }
+	   //      setTimeout(() => {
+				// this.getUserinfo = {
+		  //       	_id: "5a29f600700d2257035b0617",
+		  //       	name: "zhaifu",
+		  //       	pass: "12345",
+		  //       	flag: 0, __v: 0
+		  //       }
+	   //      }, 100)
 	    },
 	    watch: {
-	    	'getUserinfo': function (cul, old) {
-	    		this.getUserinfo = cul;
-	    		console.log(this.getUserinfo);
-	    	}
+	    	// 'getUserinfo': function (cul, old) {
+	    	// 	this.getUserinfo = cul;
+	    	// 	console.log(this.getUserinfo);
+	    	// }
 	    }
 	}
 </script>

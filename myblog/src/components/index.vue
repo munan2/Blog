@@ -1,6 +1,6 @@
 <template>
 	<div class="login-container">
-		<vue-particles
+		<!-- <vue-particles
 		    color="#dedede"
 		    :particleOpacity="0.7"
 		    :particlesNumber="80"
@@ -17,7 +17,7 @@
 		    :clickEffect="true"
 		    clickMode="push"
 		   >
-   		</vue-particles>
+   		</vue-particles> -->
       <router-view></router-view>
 	</div>
 </template>

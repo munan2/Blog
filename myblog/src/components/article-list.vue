@@ -66,7 +66,8 @@
 	    	searchContent (cul, old) {
 	    		this.$http.post('/searchArticle', {
 	    			flag: this.queryFlag,
-	    			model: cul
+	    			model: cul,
+	    			name: window.localStorage.getItem('username')
 	    		}).then(res => {
 	    			this.tableData = res.data.info;
 	    		}).catch(err => {
@@ -81,14 +82,25 @@
 	    		} else {
 	    			this.queryFlag = 0;
 	    		}
-	    		this.$http.post('/getArticle', {
+	    		if (Number(window.localStorage.getItem('userFlag')) === 0) {
+	    			this.$http.post('/getArticle', {
 	    			flag: this.queryFlag,
-	    			name: this.$route.query.name
-		    	}).then(res => {
-		    		this.tableData = res.data.info;
-		    	}).catch(err => {
-		    		console.log(err);
-		    	})
+	    			name: window.localStorage.getItem('username')
+			    	}).then(res => {
+			    		this.tableData = res.data.info;
+			    	}).catch(err => {
+			    		console.log(err);
+			    	})
+	    		} else {
+	    			this.$http.post('/getArticle', {
+	    			flag: this.queryFlag,
+			    	}).then(res => {
+			    		this.tableData = res.data.info;
+			    	}).catch(err => {
+			    		console.log(err);
+			    	})
+	    		}
+	    		
 	    	},
 	    	editArticle: function (row) {
 	    		let id = row._id;
@@ -96,13 +108,17 @@
 	    	},
 	    	deleteArticle: function (row) {
 	    		let id = row._id;
-	    		this.$http.post('/deleteArticle', {
-	    			id: id
-	    		}).then(function (res) {
-	    			this.updateList();
-	    		}).catch(function (err) {
-	    			console.log(err);
-	    		})
+	    		this.$confirm('确认要删除该用户？')
+		       	.then(_ => {
+		            this.$http.post('/deleteArticle', {
+		    			id: id
+		    		}).then(function (res) {
+		    			this.updateList();
+		    		}).catch(function (err) {
+		    			console.log(err);
+		    		})
+		        })
+          		.catch(_ => {});
 	    	}
 	    }
 

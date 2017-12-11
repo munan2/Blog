@@ -25,12 +25,12 @@
                     <span slot="title">编辑文章</span>
                 </el-menu-item>
             </router-link>
-            <router-link to="/home/setting" tag="div">
+            <!-- <router-link to="/home/setting" tag="div">
                 <el-menu-item index="3">
                     <i class="el-icon-setting"></i>
                     <span slot="title">设置中心</span>
                 </el-menu-item>
-            </router-link>
+            </router-link> -->
             <router-link to="/home/user" tag="div" v-show="flag">
                 <el-menu-item index="4">
                     <i class="el-icon-bell"></i>
@@ -42,12 +42,6 @@
 </template>
 <script>
 	export default {
-        props: {
-           'userInfo': {
-                type: Object,
-                default: {}
-            }
-        },
         data () {
             return {
                 flag: false,
@@ -56,18 +50,11 @@
             }
         },
         mounted () {
-        },
-        watch: {
-            'userInfo': function (cur, old) {
-                this.userInfo = cur;
-                this.userInfo.flag === 0 ? this.flag = false: this.flag = true;
-                this.name = this.userInfo.name;
-            }
+            Number(window.localStorage.getItem('userFlag')) === 0 ? this.flag = false : this.flag = true;
         }
-
 	}
 </script>
-<style>
+<style scoped>
 	.slider-container {
         width: 230px;
         position: fixed;
@@ -78,7 +65,7 @@
         border-right: solid 1px #e6e6e6;
         box-sizing: border-box;
     }
-    .el-menu {
+    .el-menu,.el-menu-vertical-demo {
         border-right: none;
     }
 </style>

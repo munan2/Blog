@@ -4,25 +4,18 @@
         <div class="avatar" @click="showback">
             <img :src="srcImg" alt="">
         </div>
-        <div class="back-box" v-if="show">
+        <div class="back-box">
             <router-link class="back-item" tag="span" :to="{path:'/index'}">退出</router-link>
         </div>
   </div>
 </template>
 <script>
 export default {
-    props: {
-        'userInfo': {
-            type: Object,
-            default: {}
-        }
-    },
     data () {
         return {
             show: 0,
             srcImg: require('../assets/logo.png'),
-            username: this.$route.query.name,
-            userinfo: this.userInfo
+            username: window.localStorage.getItem('username')
         }
     },
     methods: {
@@ -31,8 +24,8 @@ export default {
         }
     },
     mounted () {
-        if (this.userinfo.img) {
-            this.srcImg = res.data.info[0].img;
+        if (window.localStorage.getItem('img')) {
+            this.srcImg = window.localStorage.getItem('img');
         }
     }
 }

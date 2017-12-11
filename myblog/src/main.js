@@ -9,8 +9,8 @@ import VResource from 'vue-resource'
 import routes from './router/index'
 import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import VueParticles from 'vue-particles'
-Vue.use(VueParticles)
+// import VueParticles from 'vue-particles'
+// Vue.use(VueParticles)
 Vue.config.productionTip = false
 Vue.use(VRouter)
 Vue.use(VResource)
