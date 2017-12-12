@@ -43,6 +43,12 @@ router.post('/getAllUser', (req, res) => {
 });
 router.post('/deleteUser', (req, res) => {
 	user.deleteUser(req, res);
+});
+router.post('/saveUserInfo', (req, res) => {
+	user.saveUserInfo(req, res);
+});
+router.post('/saveImg', (req, res) => {
+	user.saveImg(req, res);
 })
 
 module.exports = router;

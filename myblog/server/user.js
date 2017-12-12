@@ -12,6 +12,12 @@ let userSchema = new Mongoose.Schema({
     },
     img: {
         type: String
+    },
+    email: {
+        type: String
+    },
+    github: {
+        type: String
     }
 });
 
@@ -55,9 +61,17 @@ let user = {
         })
     },
     searchUser: (req, res) => {
-        userModel.find({
-            name: req.body.name
-        }, (err, docs) => {
+        if(req.body.name) {
+            var params = {
+                name: req.body.name
+            }
+        } else {
+            var params = {
+                _id: req.body.id
+            }
+        }
+        console.log(params);
+        userModel.find(params, (err, docs) => {
             if (err) {
                 console.log(err);
             } else {
@@ -110,6 +124,22 @@ let user = {
                 res.send("用户删除成功")
             }
         });
+    },
+    saveUserInfo: (req, res) => {
+        userModel.update({_id: req.body.id}, {
+            img: req.body.img,
+            github: req.body.github,
+            email: req.body.email,
+            name: req.body.name
+        }, (err, docs) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send({
+                    status: 1
+                });
+            }
+        })
     }
 }
 module.exports = user;

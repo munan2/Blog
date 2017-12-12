@@ -69,7 +69,8 @@
               window.localStorage.setItem('islogin', true);
               window.localStorage.setItem('username', res.data.info[0].name);
               window.localStorage.setItem('userFlag', res.data.info[0].flag);
-              window.localStorage.setItem('img', res.data.info[0].flag.img);
+              window.localStorage.setItem('img', res.data.info[0].img);
+              window.localStorage.setItem('userId', res.data.info[0]._id);
               // this.$store.state.user = res.data.info[0];
   					  window.location.href = '/home/show?t=' + (new Date()).getTime().toString();
       			}

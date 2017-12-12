@@ -90,11 +90,18 @@
             if (res.data.status === 0) {
               this.$message('您已经注册过，请不要重复注册');
             } else {
-              window.localStorage.setItem('islogin', true);
-              window.localStorage.setItem('username', this.registForm.name);
-              window.localStorage.setItem('userFlag', 0);
-              window.localStorage.setItem('img', '');
-              window.location.href = '/home/show' + '?name=' + this.registForm.name + '&t=' + (new Date()).getTime().toString();
+              this.$http.post('/api/getUser', {
+                name: this.registForm.name
+              }).then(res => {
+                window.localStorage.setItem('islogin', true);
+                window.localStorage.setItem('username', res.data.info[0].name);
+                window.localStorage.setItem('userFlag', res.data.info[0].flag);
+                window.localStorage.setItem('img', res.data.info[0].img);
+                window.localStorage.setItem('userId', res.data.info[0]._id);
+                window.location.href = '/home/show' + '?name=' + this.registForm.name + '&t=' + (new Date()).getTime().toString();
+              }).catch(err => {
+                console.log(err);
+              })
             }
         }).catch(function (err) {
           console.log(err);

@@ -81,8 +81,8 @@ let articles = {
             date: obj.date,
             name: obj.name
         }, (err, docs) => {
-                if(err) console.log(err);
-                console.log('更改成功：' + docs);
+            if(err) console.log(err);
+            console.log('更改成功：' + docs);
         })
     },
     searchArticle: (req, res) => {

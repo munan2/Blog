@@ -18,15 +18,22 @@ export default {
             username: window.localStorage.getItem('username')
         }
     },
-    methods: {
+    methods:{
+        getImg: function () {
+            this.$http.post('/api/getUser', {
+                id: window.localStorage.getItem('userId')
+            }).then(res => {
+                this.srcImg = res.data.info[0].img;
+            }).catch(err => {
+                console.log(err);
+            });
+        },
         showback: function () {
             this.show = 1;
         }
     },
     mounted () {
-        if (window.localStorage.getItem('img')) {
-            this.srcImg = window.localStorage.getItem('img');
-        }
+        this.getImg();
     }
 }
 </script>
