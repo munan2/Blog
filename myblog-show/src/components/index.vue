@@ -4,7 +4,7 @@
 		<div class="container">
 			<div class="wrap">
 				<div class="contanier-banner">
-									<h2 class="banner-title">热门文章</h2>
+					<h2 class="banner-title">热门文章</h2>
 					<div class="nav-list">
 						<router-link tag='a' :to="{path:'/welcome/all'}">
 							<span :class="{active: nowIndex === 0}" @click="changeTab(0)">all</span>

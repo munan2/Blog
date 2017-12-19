@@ -89,8 +89,19 @@
                 }, {
                     value: 4,
                     label: '数据库'
+                }, {
+                    value: 5,
+                    label: '网络'
+                }, {
+                    value: 6,
+                    label: '打包'
                 }],
                 LabelValue: ''
+            }
+        },
+        watch: {
+            mdValue: function (cul, old) {
+                this.msg.mdValue = cul;
             }
         },
         methods: {

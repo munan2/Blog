@@ -6,8 +6,10 @@ import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import VRouter from 'vue-router'
 import routes from './router/index'
+import VResource from 'vue-resource'
 Vue.use(VRouter)
 Vue.use(iView)
+Vue.use(VResource)
 Vue.config.productionTip = false
 const router = new VRouter({
 	mode: 'history',

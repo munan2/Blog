@@ -1,7 +1,7 @@
 <template>
 	<div class="header-container">
 		<div class="wrap">
-			<a href="#" class="header-logo">My Blog</a>
+			<a href="/welcome/all" class="header-logo">My Blog</a>
 			<div class="search-box">
 				<Input v-model="value4" icon="ios-search" placeholder="请输入搜索内容" style="width: 300px"></Input>
 			</div>
@@ -24,6 +24,7 @@
 		background-color: #fff;
 		position: fixed;
 		top: 0;
+		z-index: 900;
 	}
 	.header-logo {
 		float: left;

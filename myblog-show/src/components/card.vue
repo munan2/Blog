@@ -18,7 +18,7 @@
 		},
 		methods: {
 			seeDetail: function () {
-				
+				this.$router.push('/detail/' + this.cardItem.id);
 			}
 		}
 	}
@@ -48,6 +48,9 @@
 			.author-name {
 				margin-right: 10px;
 			}
+		}
+		&:last-child {
+			border-bottom: none;
 		}
 	}
 </style>
