@@ -40,8 +40,8 @@
     import Vue from 'vue'
     import marked from 'marked'
     import scroll from 'vue-scroll'
-    import hljs from '../static/js/highlight.min.js'
-    import range from '../static/js/rangeFn.js'
+    import hljs from '../../static/js/highlight.min.js'
+    import range from '../../static/js/rangeFn.js'
     Vue.use(scroll)
     marked.setOptions({
         renderer: new marked.Renderer(),

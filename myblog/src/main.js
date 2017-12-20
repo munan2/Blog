@@ -15,7 +15,6 @@ Vue.config.productionTip = false
 Vue.use(VRouter)
 Vue.use(VResource)
 Vue.use(ElementUi)
-console.log(routes);
 const router = new VRouter({
   mode: 'history',
   routes

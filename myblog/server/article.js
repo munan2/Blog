@@ -30,6 +30,23 @@ let articles = {
         let articleItem = new articleModel(obj);
         articleItem.save();
     },
+    getArticleByLabel: (req, res) => {
+        if (req.body.label) {
+            var params = {
+                label: req.body.label,
+                flag: req.body.flag
+            }
+        } else {
+           var params = {
+                flag: req.body.flag
+            }
+        }
+        articleModel.find(params, (err, docs) => {
+            res.send({
+                info: docs
+            })
+        })
+    },
     getArticle: (req, res) => {
         if (req.body.name) {
             var params = {

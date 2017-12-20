@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const formidable = require('formidable')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 let router = require('./router')
@@ -7,7 +8,6 @@ var multer = require('multer');
 let app = express()
 
 // app.use(express.static(path.resolve(__dirname, '../dist')));
-app.use(bodyParser.json());
 
 // 调用express-session中间件，connect.id过期时间设置为10分钟
 app.use(session({
@@ -18,7 +18,8 @@ app.use(session({
     maxAge: 1000*60*1
   }
 }));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 //注意这个顺序，应该先在前面对req进行解析，再引入router，因为解析是对router文件进行的
 app.use(router);
 

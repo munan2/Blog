@@ -88,13 +88,13 @@
                     label: 'vue'
                 }, {
                     value: 4,
-                    label: '数据库'
+                    label: 'database'
                 }, {
                     value: 5,
-                    label: '网络'
+                    label: 'network'
                 }, {
                     value: 6,
-                    label: '打包'
+                    label: 'webpack'
                 }],
                 LabelValue: ''
             }

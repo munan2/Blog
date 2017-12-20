@@ -12,6 +12,9 @@ router.post('/saveArticle', (req, res) => {
 router.post('/getArticle', (req, res) => {
     res.info = articles.getArticle(req, res)
 });
+router.post('/getArticleByLabel', (req, res) => {
+    res.info = articles.getArticleByLabel(req, res)
+});
 router.post('/getOneArticle', (req, res) => {
 	res.info = articles.getOneArticle(req, res);
 });

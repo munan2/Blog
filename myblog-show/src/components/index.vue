@@ -7,25 +7,28 @@
 					<h2 class="banner-title">热门文章</h2>
 					<div class="nav-list">
 						<router-link tag='a' :to="{path:'/welcome/all'}">
-							<span :class="{active: nowIndex === 0}" @click="changeTab(0)">all</span>
+							<span :class="{active: nowIndex === 'all'}" @click="changeTab('all')">all</span>
 						</router-link>
 						<router-link tag='a' :to="{path:'/welcome/node'}">
-							<span :class="{active: nowIndex === 1}" @click="changeTab(1)">node</span>
+							<span :class="{active: nowIndex === 'node'}" @click="changeTab('node')">node</span>
 						</router-link>
 						<router-link tag='a' :to="{path:'/welcome/javascript'}">
-							<span :class="{active: nowIndex === 2}" @click="changeTab(2)">javascript</span>
+							<span :class="{active: nowIndex === 'javascript'}" @click="changeTab('javascript')">javascript</span>
 						</router-link>
 						<router-link tag='a' :to="{path:'/welcome/vue'}">
-							<span :class="{active: nowIndex === 3}" @click="changeTab(3)">vue</span>
+							<span :class="{active: nowIndex === 'vue'}" @click="changeTab('vue')">vue</span>
 						</router-link>
 						<router-link tag='a' :to="{path:'/welcome/htmlcss'}">
-							<span :class="{active: nowIndex === 4}" @click="changeTab(4)">html/css</span>
+							<span :class="{active: nowIndex === 'htmlcss'}" @click="changeTab('htmlcss')">html/css</span>
 						</router-link>
 						<router-link tag='a' :to="{path:'/welcome/database'}">
-							<span :class="{active: nowIndex === 5}" @click="changeTab(5)">数据库</span>
+							<span :class="{active: nowIndex === 'database'}" @click="changeTab('database')">database</span>
 						</router-link>
 						<router-link tag='a' :to="{path:'/welcome/network'}">
-							<span :class="{active: nowIndex === 6}"@click="changeTab(6)" >网络</span>
+							<span :class="{active: nowIndex === 'network'}"@click="changeTab('network')" >network</span>
+						</router-link>
+						<router-link tag='a' :to="{path:'/welcome/webpack'}">
+							<span :class="{active: nowIndex === 'webpack'}"@click="changeTab('webpack')" >webpack</span>
 						</router-link>
 					</div>
 				</div>
@@ -42,12 +45,16 @@
 		},
 		data () {
 			return {
-				nowIndex: 0
+				nowIndex: this.getUrl()
 			}
 		},
 		methods: {
 			changeTab: function (index) {
 				this.nowIndex = index;
+			},
+			getUrl: function () {
+				var length = this.$route.path.split('/').length;
+				return this.$route.path.split('/')[length-1];
 			}
 		}
 	}

@@ -18,7 +18,7 @@
 		},
 		methods: {
 			seeDetail: function () {
-				this.$router.push('/detail/' + this.cardItem.id);
+				this.$router.push('/detail/' + this.cardItem._id);
 			}
 		}
 	}
